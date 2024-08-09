@@ -113,7 +113,9 @@ def a_record(account_name, record_sets, prefixes):
         ip_addresses = [r["Value"] for r in record["ResourceRecords"]]
 
         for ip_address in ip_addresses:
-            result = vulnerable_aws_a_record(prefixes, ip_address, ip_time_limit)
+            # catch the traffic policy record scenario with simple check
+            if "." in ip_address or ":" in ip_address:
+                result = vulnerable_aws_a_record(prefixes, ip_address, ip_time_limit)
 
             if result:
                 process_vulnerability(domain, account_name, ip_address, "A")
