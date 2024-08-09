@@ -117,8 +117,8 @@ def a_record(account_name, record_sets, prefixes):
             if "." in ip_address or ":" in ip_address:
                 result = vulnerable_aws_a_record(prefixes, ip_address, ip_time_limit)
 
-            if result:
-                process_vulnerability(domain, account_name, ip_address, "A")
+                if result:
+                    process_vulnerability(domain, account_name, ip_address, "A")
 
 
 def get_ips(account_id, account_name):
